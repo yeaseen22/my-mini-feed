@@ -261,6 +261,17 @@ All endpoints are prefixed with `/api/v1`.
 | `npm run ios` | Run on iOS (requires macOS) |
 | `npm run android` | Run on Android |
 
+## Download APK
+
+Download the latest Android APK from Google Drive:
+
+[Download APK from Google Drive](https://drive.google.com/drive/u/2/home)
+
+1. Download the APK file from the link above
+2. Transfer to your Android device
+3. Enable "Install from unknown sources" in device settings
+4. Open the APK file to install
+
 ## License
 
 ISC
