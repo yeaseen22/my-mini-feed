@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env*.local
+.DS_Store
+*.log
+
+# mf-mobile generated native folders
+mf-mobile/android/
+mf-mobile/ios/
+mf-mobile/.expo/
+mf-mobile/dist/
+mf-mobile/web-build/
