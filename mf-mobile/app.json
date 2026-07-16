@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Mini Feeds",
-    "slug": "mf-app",
+    "slug": "mini-social-feed-app",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -21,7 +21,13 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.mfapp"
+      "package": "com.anonymous.mfapp",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
     },
     "web": {
       "output": "static",
@@ -40,7 +46,8 @@
         }
       ],
       "expo-audio",
-      "expo-video"
+      "expo-video",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -49,9 +56,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "b0105e86-f146-45be-ab9c-7267c9f17761"
+        "projectId": "f96f5e93-4b04-4888-8f38-50da46c5b1c8"
       }
     },
-    "owner": "asad_anik"
+    "owner": "yaseen-arman"
   }
 }

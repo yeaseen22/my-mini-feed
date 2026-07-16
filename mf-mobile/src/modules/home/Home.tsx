@@ -48,8 +48,6 @@ export function Home() {
                                     <Text style={styles.badgeText}>{filteredPosts.length}</Text>
                                 </View>
                             </View>
-
-                            </View>
                         </View>
 
                         <Input
