@@ -265,7 +265,7 @@ All endpoints are prefixed with `/api/v1`.
 
 Download the latest Android APK from Google Drive:
 
-[Download APK from Google Drive](https://drive.google.com/drive/u/2/home)
+[Download APK from Google Drive](https://drive.google.com/file/d/1e8iirvC-keYkuct5C8iS3_nLkioem1K_/view)
 
 1. Download the APK file from the link above
 2. Transfer to your Android device
