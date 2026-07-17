@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mf-api
+    runtime: node
+    rootDir: mf-api
+    buildCommand: npm install && npx prisma generate && tsc
+    startCommand: node dist/server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
