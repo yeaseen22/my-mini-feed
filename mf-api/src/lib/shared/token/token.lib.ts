@@ -10,10 +10,9 @@ class TokenLib {
      * @returns {string} The generated JWT as a string.
      */
     public generateToken = (payload: any, time: string = '30m') => {
-        // @ts-ignore
         return jwt.sign(payload, this.jwtSecret, {
             expiresIn: time
-        });
+        } as jwt.SignOptions);
     }
 
     /**
