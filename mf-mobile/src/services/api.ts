@@ -5,6 +5,8 @@ const API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://mini-feeds-app.onren
 
 // Render free tier cold-starts can take up to 60 seconds
 const TIMEOUT_MS = 60000;
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 5000;
 
 export const api = axios.create({
     baseURL: API_URL,
@@ -28,14 +30,31 @@ api.interceptors.request.use(async (config) => {
     return config;
 }, (error) => Promise.reject(error));
 
-// Unwrap API error messages for cleaner throws
+// Retry on timeout / network errors
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
-        // Handle Token Expiry (skip for login/register as 401 there means invalid credentials)
-        const url = error.config?.url || '';
-        const isAuthRequest = url.includes('/auth/login') || url.includes('/auth/register');
+        const config = error.config;
 
+        if (!config) return Promise.reject(error);
+
+        const url = config.url || '';
+        const isAuthRequest = url.includes('/auth/login') || url.includes('/auth/register');
+        const isRetryable = error.code === 'ECONNABORTED' ||
+            error.code === 'ERR_NETWORK' ||
+            (error.response?.status >= 500 && error.response?.status < 600);
+
+        // Initialize retry state
+        if (!config.__retryCount) config.__retryCount = 0;
+
+        if (isRetryable && !isAuthRequest && config.__retryCount < MAX_RETRIES) {
+            config.__retryCount += 1;
+            console.log(`Retrying request (${config.__retryCount}/${MAX_RETRIES}): ${url}`);
+            await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+            return api(config);
+        }
+
+        // Handle Token Expiry (skip for login/register as 401 there means invalid credentials)
         if (error.response?.status === 401 && !isAuthRequest) {
             const { useAuthStore } = await import('../store/useAuthStore');
             const { router } = await import('expo-router');
@@ -50,7 +69,7 @@ api.interceptors.response.use(
         }
 
         if (error.code === 'ECONNABORTED') {
-            return Promise.reject(new Error('Server is waking up, please try again in a moment.'));
+            return Promise.reject(new Error('Server is still waking up. Please try again.'));
         }
 
         // Extract the best possible error message from the response

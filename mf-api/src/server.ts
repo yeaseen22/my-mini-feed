@@ -1,7 +1,7 @@
 import { app } from './app/app';
 import Prisma from './prisma';
 
-const HOST: string = String(process.env.HOST || 'localhost');
+const HOST: string = String(process.env.HOST || '0.0.0.0');
 const PORT: number = Number(process.env.PORT || 8080);
 
 (async () => {
