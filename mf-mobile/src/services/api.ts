@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://mini-feeds-app.onrender.com/api/v1';
+const API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://my-mini-feed.onrender.com/api/v1';
 
 // Render free tier cold-starts can take up to 60 seconds
 const TIMEOUT_MS = 60000;
