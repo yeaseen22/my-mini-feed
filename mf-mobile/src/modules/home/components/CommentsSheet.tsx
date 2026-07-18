@@ -13,6 +13,7 @@ import {
     Platform,
     Alert
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { X, Send, Trash2 } from 'lucide-react-native';
 import { api } from '../../../services/api';
 import { useAuthStore } from '../../../store/useAuthStore';
@@ -43,6 +44,7 @@ export function CommentsSheet({ visible, postId, onClose }: CommentsSheetProps) 
     const { theme } = useThemeStore();
     const colors = Colors[theme];
     const shadow = NeuShadow[theme];
+    const insets = useSafeAreaInsets();
 
     const fetchComments = useCallback(async (pageNum: number, replace: boolean) => {
         if (replace) setIsLoading(true);
@@ -196,7 +198,7 @@ export function CommentsSheet({ visible, postId, onClose }: CommentsSheetProps) 
                         />
                     )}
 
-                    <View style={[styles.inputBar, { borderTopWidth: NeuBorder.width, borderTopColor: colors.border, paddingBottom: 30 }]}>
+                    <View style={[styles.inputBar, { borderTopWidth: NeuBorder.width, borderTopColor: colors.border, paddingBottom: Math.max(insets.bottom, 12) }]}>
                         <TextInput
                             style={[styles.input, { backgroundColor: colors.surface, color: colors.text, borderColor: colors.border, borderWidth: NeuBorder.width }]}
                             placeholder="Write a comment..."

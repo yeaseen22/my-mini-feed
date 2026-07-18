@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Mail, Lock, User, Users } from 'lucide-react-native';
+import { Mail, Lock, User, Users, Eye, EyeOff } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
@@ -24,6 +24,7 @@ export function Register() {
     const { theme } = useThemeStore();
     const colors = Colors[theme];
     const shadow = NeuShadow[theme];
+    const [showPassword, setShowPassword] = useState(false);
     const {
         fullName, setFullName,
         username, setUsername,
@@ -86,16 +87,25 @@ export function Register() {
                             <Input
                                 label="Password"
                                 placeholder="Create a password"
-                                secureTextEntry
+                                secureTextEntry={!showPassword}
                                 value={password}
                                 onChangeText={setPassword}
                                 leftIcon={<Lock size={20} color={colors.textSecondary} />}
+                                rightIcon={
+                                    <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                                        {showPassword
+                                            ? <EyeOff size={20} color={colors.textSecondary} />
+                                            : <Eye size={20} color={colors.textSecondary} />
+                                        }
+                                    </TouchableOpacity>
+                                }
                             />
 
                             <Button
                                 title="Sign Up"
                                 onPress={handleRegister}
                                 isLoading={isLoading}
+                                disabled={isLoading}
                                 style={styles.registerBtn}
                             />
                         </View>

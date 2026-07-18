@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Mail, Lock, Sparkles } from 'lucide-react-native';
+import { Mail, Lock, Sparkles, Eye, EyeOff } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -24,6 +24,7 @@ export function Login() {
     const { theme } = useThemeStore();
     const colors = Colors[theme];
     const shadow = NeuShadow[theme];
+    const [showPassword, setShowPassword] = useState(false);
     const {
         email, setEmail,
         password, setPassword,
@@ -69,10 +70,18 @@ export function Login() {
                             <Input
                                 label="Password"
                                 placeholder="Enter your password"
-                                secureTextEntry
+                                secureTextEntry={!showPassword}
                                 value={password}
                                 onChangeText={setPassword}
                                 leftIcon={<Lock size={20} color={colors.textSecondary} />}
+                                rightIcon={
+                                    <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                                        {showPassword
+                                            ? <EyeOff size={20} color={colors.textSecondary} />
+                                            : <Eye size={20} color={colors.textSecondary} />
+                                        }
+                                    </TouchableOpacity>
+                                }
                             />
 
                             <TouchableOpacity style={styles.forgotPassword}>
@@ -83,6 +92,7 @@ export function Login() {
                                 title="Sign In"
                                 onPress={handleLogin}
                                 isLoading={isLoading}
+                                disabled={isLoading}
                                 style={styles.loginBtn}
                             />
                         </View>

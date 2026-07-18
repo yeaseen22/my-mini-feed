@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs, Redirect } from 'expo-router';
 import { Home, PlusSquare, Bell, User } from 'lucide-react-native';
 import { Platform, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useThemeStore } from '@/store/useThemeStore';
 import { Colors, NeuShadow, NeuBorder } from '@/constants/Colors';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -11,10 +12,13 @@ export default function TabLayout() {
     const colors = Colors[theme];
     const shadow = NeuShadow[theme];
     const { isAuthenticated } = useAuthStore();
+    const insets = useSafeAreaInsets();
 
     if (!isAuthenticated) {
         return <Redirect href="/(auth)/login" />;
     }
+
+    const bottomPadding = Math.max(insets.bottom, 16);
 
     return (
         <Tabs screenOptions={{
@@ -29,7 +33,7 @@ export default function TabLayout() {
             },
             tabBarStyle: {
                 position: 'absolute',
-                bottom: Platform.OS === 'ios' ? 24 : 16,
+                bottom: bottomPadding,
                 left: 20,
                 right: 20,
                 borderRadius: 0,
@@ -40,7 +44,7 @@ export default function TabLayout() {
                 borderColor: colors.border,
                 marginLeft: 20,
                 marginRight: 20,
-                paddingBottom: Platform.OS === 'ios' ? 0 : 10,
+                paddingBottom: 10,
                 paddingTop: 10,
                 ...shadow,
             },
