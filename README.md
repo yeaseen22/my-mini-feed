@@ -1,5 +1,7 @@
 # MiniFeeds - Social Media Application
 
+> **[Download APK](https://drive.google.com/file/d/1nomIpK-wLa3ylJL-lhS14YjDSKn065Ci/view?usp=sharing)** | **[Live Backend](https://my-mini-feed.onrender.com/api/v1)**
+
 A lightweight social media application built with Node.js/Express backend and React Native/Expo mobile app. Users can post text updates, interact with posts via likes and comments, and receive real-time push notifications.
 
 ## Project Structure
@@ -265,7 +267,7 @@ All endpoints are prefixed with `/api/v1`.
 
 Download the latest Android APK from Google Drive:
 
-[Download APK from Google Drive](https://drive.google.com/file/d/1e8iirvC-keYkuct5C8iS3_nLkioem1K_/view)
+[Download APK from Google Drive](https://drive.google.com/file/d/1nomIpK-wLa3ylJL-lhS14YjDSKn065Ci/view?usp=sharing)
 
 1. Download the APK file from the link above
 2. Transfer to your Android device
