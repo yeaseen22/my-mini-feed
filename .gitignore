@@ -3,6 +3,7 @@ node_modules/
 .env*.local
 .DS_Store
 *.log
+mf-api/dist/
 
 # mf-mobile generated native folders
 mf-mobile/android/
