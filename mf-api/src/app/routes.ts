@@ -7,6 +7,12 @@ router.use('/api/v1/auth', authRoutes);
 router.use('/api/v1/posts', postRoutes);
 router.use('/api/v1/users', userRoutes);
 
+router.get('/', (_req: Request, res: Response, _next: NextFunction) => {
+    res.status(200).json({
+        message: 'MiniFeeds API is running'
+    });
+});
+
 router.get('/health', (_req: Request, res: Response, _next: NextFunction) => {
     res.status(200).json({
         message: 'Successful',
