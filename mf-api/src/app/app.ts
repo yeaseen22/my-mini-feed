@@ -13,8 +13,10 @@ app.use(middleware);
 // Load routes
 app.use(routes);
 
-// Error handling middleware
-app.use(errorHandlerMiddleware);
+// Not found middleware (must be before error handler)
 app.use('/', notFoundMiddleware);
+
+// Error handling middleware (must be last)
+app.use(errorHandlerMiddleware);
 
 export { app };
